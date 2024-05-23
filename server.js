@@ -128,6 +128,7 @@ io.on('connection', (socket) => {
                 }
                 /* Announce to everyone that is in the room, who else is in the room */
                 for (const member of sockets) {
+                    let room = players[member.id].room;
                     response = {
                         result: 'success',
                         socket_id: member.id,
@@ -135,10 +136,10 @@ io.on('connection', (socket) => {
                         username: players[member.id].username,
                         count: sockets.length,
                     }
+                    /* Tell everyone a new user has joined the chat room */
+                    io.of('/').to(room).emit('join_room_response',response);
+                    serverLog('join_room succeeded', JSON.stringify(response));
                 }  
-                /* Tell everyone a new user has joined the chat room */
-                io.of('/').to(room).emit('join_room_response',response);
-                serverLog('join_room succeeded', JSON.stringify(response));
             }
         });
     });
