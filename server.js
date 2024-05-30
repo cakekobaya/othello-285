@@ -258,9 +258,11 @@ io.on('connection', (socket) => {
             return;
         }
 
-
         /* Make sure that the uninvited player is present */
         io.in(room).allSockets().then((sockets) => {
+            /* Debug logging */
+            serverLog('', sockets);     
+            serverLog('', requested_user);  
             /* Uninvitee isn't in the room */
             if ((typeof sockets == 'undefined') || (sockets === null) || !sockets.has(requested_user)) {
                 response = {
