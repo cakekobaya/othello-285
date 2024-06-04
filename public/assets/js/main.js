@@ -19,7 +19,7 @@ if ((typeof username == 'undefined') || (username === null) || (username === 'nu
 
 let chatRoom = decodeURI(getIRIParameterValue('game_id'));
 if ((typeof chatRoom == 'undefined') || (chatRoom === null) || (chatRoom === 'null')) {
-    chatroom = 'Lobby';
+    chatRoom = 'Lobby';
 }
 
 /*Set up socket.io connection to the server*/

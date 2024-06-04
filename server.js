@@ -233,7 +233,7 @@ io.on('connection', (socket) => {
         let requested_user = payload.requested_user;
         let room = players[socket.id].room;
         let username = players[socket.id].username;
-        if ((typeof requested_user == 'undefined') || (requested_user = null) || (requested_user === "")) {
+        if ((typeof requested_user == 'undefined') || (requested_user == null) || (requested_user === "")) {
             response = {
                 result: 'fail',
                 message: 'client did not request a valid user to uninvite',
@@ -264,8 +264,8 @@ io.on('connection', (socket) => {
         /* Make sure that the uninvited player is present */
         io.in(room).allSockets().then((sockets) => {
             /* Debug logging */
-            serverLog('', sockets);     
-            serverLog('', requested_user);  
+            /* serverLog('', sockets); */
+            serverLog('', requested_user); 
             /* Uninvitee isn't in the room */
             if ((typeof sockets == 'undefined') || (sockets === null) || !sockets.has(requested_user)) {
                 response = {
@@ -670,7 +670,7 @@ function send_game_update(socket,game_id,message) {
     let count = 0;
     for(let row = 0; row < 8; row++){
         for(let column = 0; column < 8; column++){
-            if(games[games_id].board[row][column] != ' ') {
+            if(games[game_id].board[row][column] != ' ') {
                 count++;
             }
         }
